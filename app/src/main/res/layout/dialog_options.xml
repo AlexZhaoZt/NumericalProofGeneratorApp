@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="214dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="论证设置"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/strong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="强算术论证"
+                tools:layout_editor_absoluteX="96dp"
+                tools:layout_editor_absoluteY="196dp" />
+
+            <CheckBox
+                android:id="@+id/weak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="弱算术论证"
+                tools:layout_editor_absoluteX="129dp"
+                tools:layout_editor_absoluteY="248dp" />
+
+            <CheckBox
+                android:id="@+id/sum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="求和论证"
+                tools:layout_editor_absoluteX="129dp"
+                tools:layout_editor_absoluteY="153dp" />
+
+            <CheckBox
+                android:id="@+id/pozhen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="迫真论证"
+                tools:layout_editor_absoluteX="145dp"
+                tools:layout_editor_absoluteY="280dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="确定" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
