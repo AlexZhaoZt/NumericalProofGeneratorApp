@@ -1,6 +1,13 @@
 # NumericalProofGeneratorApp
 android App 版的数字论证生成器
 
+下载APK：
+
+Google Drive：https://drive.google.com/open?id=1Vzyo3Gp-nxXZWmEYwuWnukaZYd-Z7Hj9
+
+百度网盘：https://pan.baidu.com/s/15TXV6Md3UQ1_tmJ9-Bv1ZA
+
+
 用 Android Studio 做的。想起来可以直接在 Android Studio 上通过 JNI (Java Native Interface) 用 C++ 代码，就产生了把数字论证生成器做成 android App 的念头。
 
 数字论证生成器（C++）repo：https://github.com/AlexZhaoZt/numerical_proof_generator
