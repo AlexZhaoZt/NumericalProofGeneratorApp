@@ -14,11 +14,88 @@ string sum_str = "";
 
 extern "C" JNIEXPORT void
 JNICALL
+Java_com_bugting_www_numericalproofgenerator_result_reset (
+        JNIEnv *env,
+        jobject) {
+    auto_stop = false;
+    counter = 0;
+    calculation = 0;
+    arr.clear();
+    base.clear();
+    sum_str = "";
+}
+
+
+extern "C" JNIEXPORT void
+JNICALL
 Java_com_bugting_www_numericalproofgenerator_result_changeStop (
         JNIEnv *env,
         jobject,
         jboolean st) {
     auto_stop = (bool) st;
+}
+
+char* func(string str) {
+    long l = str.length() + 1;
+    char* char_array = new char[l];
+    strcpy(char_array, str.c_str());
+    return char_array;
+}
+
+extern "C" JNIEXPORT jstring
+JNICALL
+Java_com_bugting_www_numericalproofgenerator_result_pozhen(
+        JNIEnv *env,
+        jobject,
+        jdouble key) {
+    if (counter != 0 && auto_stop) {
+        return NULL;
+    }
+    desired = (double) key;
+    string number = to_string(desired);
+    int notZero = 0;
+    for (int i = 0; i < (int) number.size(); i++) {
+        if (number.at(i) != '0') {
+            notZero = i;
+        }
+    }
+    number = number.substr(0, notZero);
+    string output = "";
+    for (char ch : number) {
+        string temp;
+        switch (ch) {
+            case '0': temp = string(1, ch) + "=1-1^(4+5+1+4)\n";
+                break;
+            case '1': temp = string(1, ch) + "=1^(1+4+5+1+4)\n";
+                break;
+            case '2': temp = string(1, ch) + "=1+1^(4-5-1+4)\n";
+                break;
+            case '3': temp = string(1, ch) + "=1-1+(4-5)^1+4\n";
+                break;
+            case '4': temp = string(1, ch) + "=1*1*4^(5*1-4)\n";
+                break;
+            case '5': temp = string(1, ch) + "=1-(1+(4-5)^1)+4\n";
+                break;
+            case '6': temp = string(1, ch) + "=1*1-(4-5*1)+4\n";
+                break;
+            case '7': temp = string(1, ch) + "=1+1^(4+5)+1+4\n";
+                break;
+            case '8': temp = string(1, ch) + "=(1*1-(4-5)*1)*4\n";
+                break;
+            case '9': temp = string(1, ch) + "=(1-1+4+5)*(1^4)\n";
+                break;
+        }
+        output += temp;
+    }
+    counter++;
+//    auto func = [](string str) {
+//        long l = str.length() + 1;
+//        char* char_array = new char[l];
+//        strcpy(char_array, str.c_str());
+//        return char_array;
+//    };
+    return env->NewStringUTF(func(output));
+
 }
 
 extern "C" JNIEXPORT jobjectArray
@@ -37,12 +114,12 @@ Java_com_bugting_www_numericalproofgenerator_result_strong(
                                             env->FindClass("java/lang/String"),
                                             env->NewStringUTF(""));
     //lambda
-    auto func = [](string str) {
-        long l = str.length() + 1;
-        char* char_array = new char[l];
-        strcpy(char_array, str.c_str());
-        return char_array;
-    };
+//    auto func = [](string str) {
+//        long l = str.length() + 1;
+//        char* char_array = new char[l];
+//        strcpy(char_array, str.c_str());
+//        return char_array;
+//    };
     for (int i = 0; i < arr.size(); i++) {
         env->SetObjectArrayElement(
                 jar,i,env->NewStringUTF(func(car[i])));
@@ -67,12 +144,12 @@ Java_com_bugting_www_numericalproofgenerator_result_weak(
                                             env->FindClass("java/lang/String"),
                                             env->NewStringUTF(""));
     //lambda
-    auto func = [](string str) {
-        long l = str.length() + 1;
-        char* char_array = new char[l];
-        strcpy(char_array, str.c_str());
-        return char_array;
-    };
+//    auto func = [](string str) {
+//        long l = str.length() + 1;
+//        char* char_array = new char[l];
+//        strcpy(char_array, str.c_str());
+//        return char_array;
+//    };
     for (int i = 0; i < arr.size(); i++) {
         env->SetObjectArrayElement(
                 jar,i,env->NewStringUTF(func(car[i])));
@@ -120,12 +197,12 @@ Java_com_bugting_www_numericalproofgenerator_result_sum(
                                             env->FindClass("java/lang/String"),
                                             env->NewStringUTF(""));
     //lambda
-    auto func = [](string str) {
-        long l = str.length() + 1;
-        char* char_array = new char[l];
-        strcpy(char_array, str.c_str());
-        return char_array;
-    };
+//    auto func = [](string str) {
+//        long l = str.length() + 1;
+//        char* char_array = new char[l];
+//        strcpy(char_array, str.c_str());
+//        return char_array;
+//    };
     for (int i = 0; i < arr.size(); i++) {
         env->SetObjectArrayElement(
                 jar,i,env->NewStringUTF(func(car[i])));
@@ -248,6 +325,9 @@ int main() {
  */
 
 void strongProof() {
+    if (auto_stop && counter != 0) {
+        return;
+    }
     calculation = 0;
     counter = 0;
     base.clear();
@@ -281,6 +361,9 @@ void strongProof() {
 }
 
 void weakProof() {
+    if (auto_stop && counter != 0) {
+        return;
+    }
     calculation = 0;
     counter = 0;
     queue<char> q;
@@ -336,6 +419,9 @@ void choose(queue<char> remain, vector<double> current) {
 }
 
 void put(vector<int> v, int max_length) {
+    if (auto_stop && counter != 0) {
+        return;
+    }
     put(v, 2, 2, 0, max_length);
 }
 
@@ -343,7 +429,7 @@ void put(vector<int> v, int max_length) {
 //-1: -1, 0: number, 1: +, 2: -, 3: *, 4: /, 5: ^.
 void put(vector<int> v, int pos, int numCounter, int symCounter, int length_) {
     //cout << "put called" << endl;
-    if (auto_stop && arr.size() != 0) {
+    if (auto_stop && counter != 0) {
         return;
     }
     if (pos == length_) {
